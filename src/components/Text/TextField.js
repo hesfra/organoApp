@@ -1,18 +1,14 @@
-import { useState } from 'react'
 import './TextField.css'
 export const TextField = (props) =>{
- 
-    const [value, setValue] = useState('')
 
     const onDigit = (e) =>{
-        setValue = e.target.value
-        console.log(value)
+        props.onChanged(e.target.value)
     }
     
 return(
     <div className="textField">
         <label>{props.label}</label>
-        <input onChange={onDigit} required={props.required} placeholder={props.placeholder}/>
+        <input value={props.value} onChange={onDigit} required={props.required} placeholder={props.placeholder}/>
     </div>
 )
 }
