@@ -3,52 +3,64 @@ import Banner from './components/Banner';
 import Footer from './components/Footer';
 import Form from './components/Form';
 import Team from './components/Team';
-
+import {v4 as uuidv4} from 'uuid';
 
 function App() {
 
-  const teams = [
+  const [teams, setTeams] = useState([
     {
+      id: uuidv4(),
       name: 'Programação',
-      primaryColor: '#57c278',
-      secundaryColor: '#d9f7e9',
+      color: '#57c278',
     },
     {
+      id: uuidv4(),
       name: 'Front-End',
-      primaryColor: '#82cffa',
-      secundaryColor: '#e8f8ff',
+      color: '#82cffa',
     },
     {
+      id: uuidv4(),
       name: 'Data Science',
-      primaryColor: '#a6d157',
-      secundaryColor: '#f0f8e2',
+      color: '#a6d157',
     },
-    {
+    { 
+      id: uuidv4(),
       name: 'Devops',
-      primaryColor: '#e06869',
-      secundaryColor: '#fde7e8',
+      color: '#e06869',
     },
     {
+      id: uuidv4(),
       name: 'UX e Design',
-      primaryColor: '#db6ebf',
-      secundaryColor: '#fae9f5',
+      color: '#db6ebf',
     },
     {
+      id: uuidv4(),
       name: 'Mobile',
-      primaryColor: '#ffba05',
-      secundaryColor: '#fff5d9',
+      color: '#ffba05',
     },
     {
+      id: uuidv4(),
       name: 'Inovação e Gestão',
-      primaryColor: '#ff8a29',
-      secundaryColor: '#ffeedf',
+      color: '#ff8a29',
     }
-  ]
+  ])
 
   const [morePerson, setMorePerson] = useState([]);
 
   const onNewPersonAdd = (person) => {
     setMorePerson([...morePerson, person]);
+  }
+  const changeTeamColor = (color, name) => {
+    setTeams(teams.map(team => {
+      if (team.name === name) {
+        team.color = color;
+      }
+      return team
+    }))
+  }
+
+  const deletePerson = () => {
+    console.log('deletando snjhgbjhcsdbgf')
   }
 
   return (
@@ -56,13 +68,16 @@ function App() {
       <Banner />
       <Form teams={teams.map(team => team.name)} onFormSubmit={person => onNewPersonAdd(person)} />
       {teams.map(team =>
-        <Team key={team.name}
+        <Team
+          changeColor={changeTeamColor}
+          key={team.name}
           teamName={team.name}
-          primaryColor={team.primaryColor}
-          secundaryColor={team.secundaryColor}
-          morePerson={morePerson.filter(person =>person.team == team.name)}
-        />)}
-        <Footer/>
+          color={team.color}
+          morePerson={morePerson.filter(person => person.team == team.name)}
+          onDelete={deletePerson}
+        />
+      )}
+      <Footer />
     </div>
   );
 }
