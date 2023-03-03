@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Banner from './components/Banner';
 import Footer from './components/Footer';
-import Form from './components/Form';
 import Team from './components/Team';
 import {v4 as uuidv4} from 'uuid';
+import Forms from './components/Form';
 
 function App() {
 
@@ -50,29 +50,39 @@ function App() {
   const onNewPersonAdd = (person) => {
     setMorePerson([...morePerson, person]);
   }
-  const changeTeamColor = (color, name) => {
+  const changeTeamColor = (color, id) => {
     setTeams(teams.map(team => {
-      if (team.name === name) {
+      if (team.id === id) {
         team.color = color;
       }
       return team
     }))
   }
 
-  const deletePerson = () => {
-    console.log('deletando snjhgbjhcsdbgf')
+  const deletePerson = (id) => {
+    setMorePerson.filter(morePerson.filter(person=> person.id !== id))
+  }
+
+  const createTeam = (newTeam) =>{
+    setTeams([...teams, {...newTeam,id: uuidv4()}])
+    console.log(teams)
   }
 
   return (
     <div className="App">
       <Banner />
-      <Form teams={teams.map(team => team.name)} onFormSubmit={person => onNewPersonAdd(person)} />
+      <div className='forms' style={{display:'flex', alignItems:'center', justifyContent: 'space-around'}}>
+      <Forms.Form teams={teams.map(team => team.name)} onFormSubmit={person => onNewPersonAdd(person)}
+      />
+      <Forms.TeamForm 
+      createTeam = {createTeam}
+      />
+      </div>
       {teams.map(team =>
         <Team
           changeColor={changeTeamColor}
-          key={team.name}
-          teamName={team.name}
-          color={team.color}
+          key={team.id}
+          team={team}
           morePerson={morePerson.filter(person => person.team == team.name)}
           onDelete={deletePerson}
         />

@@ -3,6 +3,7 @@ import Button from '../Button'
 import Dropdown from '../Dropdown'
 import TextField from '../Text'
 import './form.css'
+import {v4 as uuidv4} from 'uuid';
 
 export const Form = (props) => {
 
@@ -10,7 +11,7 @@ export const Form = (props) => {
     const [office, setOffice] = useState('');
     const [image, setImage] = useState('');
     const [team, setTeam] = useState('');
-
+    const id = uuidv4();
 
     const onSave = (e) => {
         e.preventDefault()
@@ -18,7 +19,9 @@ export const Form = (props) => {
             name,
             office,
             image,
-            team
+            team,
+            id
+            
         })
         setName('');
         setImage('');

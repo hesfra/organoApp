@@ -1,2 +1,9 @@
 import { Form } from "./Form";
-export default Form;
+import { TeamForm } from "./FormTeam";
+
+
+const Forms = {
+    TeamForm,
+    Form
+}
+export default Forms
