@@ -49,7 +49,6 @@ function App() {
 
   const onNewPersonAdd = (person) => {
     setMorePerson([...morePerson, person]);
-    console.log(morePerson)
   }
   const changeTeamColor = (teamColor, id) => {
     setTeams(teams.map(team => {
@@ -62,12 +61,10 @@ function App() {
 
   const deletePerson = (id) => {
     setMorePerson(morePerson.filter(person=> person.id !== id))
-    console.log(morePerson)
   }
 
   const createTeam =  (newTeam) =>{
     setTeams([...teams, {...newTeam}])
-    console.log(teams)
   }
 
   return (

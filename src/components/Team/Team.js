@@ -15,7 +15,7 @@ export const Team = ({ team, morePerson, onDelete, changeColor}) => {
                     name={person.name}
                     office={person.office}
                     image={person.image}
-                    onDelete={onDelete} />
+                    onDelete={() => {onDelete(person.id)}} />
                     })}
             </div>
         </section>
