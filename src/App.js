@@ -49,22 +49,24 @@ function App() {
 
   const onNewPersonAdd = (person) => {
     setMorePerson([...morePerson, person]);
+    console.log(morePerson)
   }
-  const changeTeamColor = (color, id) => {
+  const changeTeamColor = (teamColor, id) => {
     setTeams(teams.map(team => {
       if (team.id === id) {
-        team.color = color;
+        team.color = teamColor;
       }
       return team
     }))
   }
 
   const deletePerson = (id) => {
-    setMorePerson.filter(morePerson.filter(person=> person.id !== id))
+    setMorePerson(morePerson.filter(person=> person.id !== id))
+    console.log(morePerson)
   }
 
-  const createTeam = (newTeam) =>{
-    setTeams([...teams, {...newTeam,id: uuidv4()}])
+  const createTeam =  (newTeam) =>{
+    setTeams([...teams, {...newTeam}])
     console.log(teams)
   }
 
@@ -75,7 +77,7 @@ function App() {
       <Forms.Form teams={teams.map(team => team.name)} onFormSubmit={person => onNewPersonAdd(person)}
       />
       <Forms.TeamForm 
-      createTeam = {createTeam}
+       createTeam = {createTeam}
       />
       </div>
       {teams.map(team =>
