@@ -67,6 +67,16 @@ function App() {
     setTeams([...teams, {...newTeam}])
   }
 
+  const changeFavorite = (id) =>{
+    setMorePerson(morePerson.map(person =>{
+      if(person.id === id)
+      { 
+        person.favorite = !person.favorite;
+      }
+      return person
+    }))
+  }
+
   return (
     <div className="App">
       <Banner />
@@ -82,8 +92,9 @@ function App() {
           changeColor={changeTeamColor}
           key={team.id}
           team={team}
-          morePerson={morePerson.filter(person => person.team == team.name)}
+          morePerson={morePerson.filter(person => person.team === team.name)}
           onDelete={deletePerson}
+          onFavorite={changeFavorite}
         />
       )}
       <Footer />

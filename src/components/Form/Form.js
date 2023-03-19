@@ -20,6 +20,7 @@ export const Form = (props) => {
             office,
             image,
             team,
+            favorite: false,
             id
             
         })

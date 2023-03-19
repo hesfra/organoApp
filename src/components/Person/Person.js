@@ -1,7 +1,7 @@
 import './Person.css';
-import {AiFillCloseCircle} from 'react-icons/ai';
+import {AiFillCloseCircle , AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
-export const Person = ({name, image, office, id, color ,onDelete}) => {
+export const Person = ({name, favorite, image, office, id, color ,onDelete, onFavorite}) => {
     return (
         <div className='person'>
             <AiFillCloseCircle size={25} className='delete' onClick={() => onDelete(id)}/>
@@ -11,6 +11,9 @@ export const Person = ({name, image, office, id, color ,onDelete}) => {
             <div className='rodape'>
             <h4>{name}</h4>
             <h5>{office}</h5>
+            <div className='favorite'>
+            {favorite ? < AiFillHeart size={25} onClick={onFavorite}/> : <AiOutlineHeart size={25} onClick={onFavorite} />}
+            </div>
             </div>
         </div>
     )
